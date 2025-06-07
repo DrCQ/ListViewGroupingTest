@@ -1,0 +1,103 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:matD="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:vm="clr-namespace:ListViewGroupingTest.ViewModel"
+    xmlns:hp="clr-namespace:ListViewGroupingTest.Helper"
+    xmlns:cv="clr-namespace:ListViewGroupingTest.Converters"
+    xmlns:local="clr-namespace:ListViewGroupingTest">
+
+    <!-- Invoke ViewModelLocator to register services and classes -->
+    <vm:ViewModelLocator x:Key="Locator"/>
+
+    <!-- Convertera -->
+    <cv:BooleanToNotBooleanConverter x:Key="Boolean2Not"/>
+    <cv:BooleanToVisibilityConverter x:Key="Boolean2Visibility"/>
+    <cv:CounterToVisibilityConverter x:Key="Counter2Visibility"/>
+    <cv:NotNothingToBooleanConverter x:Key="NotNothing2Boolean"/>
+    <cv:NotNothingToVisibilityConverter x:Key="NotNothing2Visibility"/>
+    
+    <!--#region  Notifications: Icons and Styles -->
+
+    <!-- Definition of Common Notification Icons -->
+    <matD:PackIconKind x:Key="ErrorIcon">ALertCircle</matD:PackIconKind>
+    <matD:PackIconKind x:Key="WarningIcon">ALert</matD:PackIconKind>
+    <matD:PackIconKind x:Key="InfoIcon">ALertBox</matD:PackIconKind>
+    <matD:PackIconKind x:Key="NotificationIcon">BellRing</matD:PackIconKind>
+
+    <!-- PackIconStyle -->
+    <Style x:Key="PackIconStyle" TargetType="{x:Type Control}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+    </Style>
+
+    <!-- ErrorIconStyle -->
+    <Style x:Key="ErrorIconStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource PackIconStyle}">
+        <Setter Property="Foreground" Value="OrangeRed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding  MainWindowVM.IsDarkMode, Source={StaticResource Locator}}" Value="False">
+                <Setter Property="Foreground" Value="Red"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- WarningIconStyle -->
+    <Style x:Key="WarningIconStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource PackIconStyle}">
+        <Setter Property="Foreground" Value="Yellow"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding  MainWindowVM.IsDarkMode, Source={StaticResource Locator}}" Value="False">
+                <Setter Property="Foreground" Value="Orange"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- InfoIconStyle -->
+    <Style x:Key="InfoIconStyle" TargetType="{x:Type Control}" BasedOn="{StaticResource PackIconStyle}">
+        <Setter Property="Foreground" Value="LightBlue"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding  MainWindowVM.IsDarkMode, Source={StaticResource Locator}}" Value="False">
+                <Setter Property="Foreground" Value="Blue"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--#endregion -->
+
+    <!-- WndButtonStyle -->
+    <Style x:Key="WndButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="Margin" Value="1,0"/>
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesign.Brush.Foreground}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="matD:ElevationAssist.Elevation" Value="Dp0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource MaterialDesign.Brush.TextBox.HoverBackground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- DialogHeaderDataTemplate -->
+    <DataTemplate x:Key="DialogHeaderDataTemplate" DataType="{x:Type hp:CommandItemAssist}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <matD:PackIcon Kind="{Binding IconKind}" Height="32" Width="32" VerticalAlignment="Center" Margin="10,0"/>
+            <TextBlock Text="{Binding Header}" Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                       FontWeight="Medium"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- DialogHeaderStyle -->
+    <Style x:Key="DialogHeaderStyle" TargetType="matD:ColorZone" BasedOn="{StaticResource {x:Type matD:ColorZone}}">
+        <Setter Property="Mode" Value="Inverted"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="ContentTemplate" Value="{StaticResource DialogHeaderDataTemplate}"/>
+    </Style>
+    
+</ResourceDictionary>

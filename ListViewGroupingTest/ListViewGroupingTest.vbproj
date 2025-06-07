@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <RootNamespace>ListViewGroupingTest</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Graphic\application-32.ico</ApplicationIcon>
+    <Title>Material Design 5.0  NET 8.0 Template App</Title>
+    <Company>Dr. CQ Soft</Company>
+    <Copyright>Copyright © 2025</Copyright>
+    <Description>Application Template for NET 9.0 using the MaterialDesign Themes (5.2) and Colors (5.2). This is an MVVM application based on the Community Toolkit 8.4</Description>
+    <Product>Material Design 5.2 - NET 9.0 Template App</Product>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageId></PackageId>
+    <AssemblyName>Material Design 5.2 - NET 9.0 Template App</AssemblyName>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Graphic\application-32.png" />
+    <None Remove="Graphic\application-96-dark.png" />
+    <None Remove="Graphic\application-96-light.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Graphic\application-32.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="System.Windows" />
+    <Import Include="System.Windows.Controls" />
+    <Import Include="System.Windows.Data" />
+    <Import Include="System.Windows.Documents" />
+    <Import Include="System.Windows.Input" />
+    <Import Include="System.Windows.Media" />
+    <Import Include="System.Windows.Media.Imaging" />
+    <Import Include="System.Windows.Navigation" />
+    <Import Include="System.Windows.Shapes" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Graphic\application-32.png" />
+    <Resource Include="Graphic\application-96-dark.png" />
+    <Resource Include="Graphic\application-96-light.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="My Project\Settings.Designer.vb">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="My Project\Settings.settings">
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

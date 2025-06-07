@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="View.ListViewPresenterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:matD="http://materialdesigninxaml.net/winfx/xaml/themes"  
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ListViewGroupingTest"
+             xmlns:vm="clr-namespace:ListViewGroupingTest.ViewModel"
+             Background="{DynamicResource MaterialDesign.Brush.Primary.Background}"
+             DataContext="{Binding ListViewPresenterVM,Source={StaticResource Locator}}"
+             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+
+        <!-- ImageItemTemplate -->
+        <DataTemplate x:Key="ImageItemTemplate" DataType="{x:Type vm:ImageItemViewModel}">
+            <Border BorderThickness="1" BorderBrush="DarkBlue">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="{Binding ImageIcon}" Width="100" Height="100" Margin="20,0"/>
+                    <TextBlock Grid.Row="1" Text="{Binding ImageName}" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- ListViewStyle -->
+        <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}" BasedOn="{StaticResource {x:Type ListView}}">
+            <Setter Property="matD:ListViewAssist.ListViewItemPadding" Value="5"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource ImageItemTemplate}"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBarTray>
+            <ToolBar>
+                <CheckBox Content="Group Content" IsChecked="{Binding IsGrouping, Mode=TwoWay}" Style="{StaticResource MaterialDesignFilterChipCheckBox}"/>
+            </ToolBar>
+        </ToolBarTray>
+        <matD:Card Grid.Row="1">
+            <ListView ItemsSource="{Binding ImageView}" Style="{StaticResource ListViewStyle}">
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+        </matD:Card>
+            
+    </Grid>
+    
+</UserControl>

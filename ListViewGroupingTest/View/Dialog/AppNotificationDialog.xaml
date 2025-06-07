@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="View.Dialog.AppNotificationDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:matD="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:local="clr-namespace:ListViewGroupingTest"
+             xmlns:vm="clr-namespace:ListViewGroupingTest.ViewModel"
+             xmlns:hp="clr-namespace:ListViewGroupingTest.Helper"
+             MinWidth="500"
+             d:DataContext="{d:DesignInstance vm:StatusBarViewModel}"
+             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+
+        <hp:CommandItemAssist x:Key="NotificationsHeader" Header="NOTIFICATIONS LIST" IconKind="{StaticResource NotificationIcon}"/>
+
+    </UserControl.Resources>
+
+    <Border BorderThickness="2" ClipToBounds="True" BorderBrush="{DynamicResource MaterialDesignDivider}" matD:ElevationAssist.Elevation="Dp12">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <matD:ColorZone Grid.Row="0" Content="{StaticResource NotificationsHeader}" Style="{StaticResource DialogHeaderStyle}" Margin="1,1,1,0" CornerRadius="3"/>
+            <!-- Button's Area -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,5">
+                <Button Content="CLEAR LIST" Style="{StaticResource MaterialDesignPaperButton}" Width="120" Margin="0,0,20,0"
+                        Command="{Binding ClearListCommand}"/>
+                <Button Content="CLEAR ALL" Style="{StaticResource MaterialDesignPaperButton}" Width="120" Margin="0,0,20,0"
+                        Command="{Binding ClearNotificationsCommand}"/>
+                <Button Content="CLOSE" IsDefault="True" Style="{StaticResource MaterialDesignPaperButton}" Width="120"
+                        Command="{Binding CloseListCommand}" />
+                <!-- Command="{x:Static matD:PopupBox.ClosePopupCommand}" -->
+            </StackPanel>
+            <!-- Filters -->
+            <Border Grid.Row="1" BorderThickness="0,0,0,2" BorderBrush="{DynamicResource MaterialDesignDivider}">
+                <ListBox Style="{StaticResource MaterialDesignFilterChipOutlineListBox}" Padding="20,3">
+                    <ListBoxItem IsEnabled="{Binding ErrorCount, Mode=OneWay}" IsSelected="{Binding ShowErrors}">
+                        <StackPanel Orientation="Horizontal">
+                            <matD:PackIcon Kind="{StaticResource ErrorIcon}" Style="{StaticResource ErrorIconStyle}"/>
+                            <TextBlock Text="{Binding ErrorCount, Mode=OneWay, StringFormat=Errors: \{0\}}" Margin="10,0,20,0" VerticalAlignment="Center" d:Text="Errors"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem IsEnabled="{Binding WarningCount, Mode=OneWay}" IsSelected="{Binding ShowWarnings}">
+                        <StackPanel Orientation="Horizontal">
+                            <matD:PackIcon Kind="{StaticResource WarningIcon}" Style="{StaticResource WarningIconStyle}"/>
+                            <TextBlock Text="{Binding WarningCount, Mode=OneWay, StringFormat=Warnings: \{0\}}" Margin="10,0,20,0" VerticalAlignment="Center" d:Text="Warnings"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem IsEnabled="{Binding InfoCount, Mode=OneWay}" IsSelected="{Binding ShowInfos}">
+                        <StackPanel Orientation="Horizontal">
+                            <matD:PackIcon Kind="{StaticResource InfoIcon}" Style="{StaticResource InfoIconStyle}"/>
+                            <TextBlock Text="{Binding InfoCount, Mode=OneWay, StringFormat=Infos: \{0\}}" Margin="10,0,20,0" VerticalAlignment="Center" d:Text="Infos"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </Border>
+            <!-- Notifications ListView -->
+            <ListView Grid.Row="2" ItemsSource="{Binding NotificationsView}" HorizontalAlignment="Stretch">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource {x:Type ListViewItem}}">
+                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="{Binding AutoWidth, Mode=OneWay}"/>
+                        <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Source}" Width="{Binding AutoWidth, Mode=OneWay}"/>
+                        <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Message}" Width="{Binding AutoWidth, Mode=OneWay}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Border>
+    
+</UserControl>
