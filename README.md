@@ -28,4 +28,8 @@ The wrong alignement occurres when the `ListView` control should support Groupin
    </ListView.GroupStyle>
 </ListView>
 ```
-The resulting view is shown in the next picture.
+The resulting view is shown in the next picture. The horizontal wrap alignment is replaces wit the vertical alignment.
+
+![](https://github.com/DrCQ/ListViewGroupingTest/blob/570a93803c2ec17e03a81aad5ea7c5b82c463ab2/ListViewGroupingTest/Pictures/PhotoBook%20with%20Wrong%20Alignment.png)
+
+After activating the Grouping functionality (adding the `GroupDescription`) the view show proper grouping alignment using the default style (our `GroupStyle` property was empty).
