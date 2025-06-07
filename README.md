@@ -1,5 +1,5 @@
 # ListViewGroupingTest
-This small WPF application (*PhotoBook*) shows a wrong behaviour of the `ListView` Control while using the Grouping functionality.
+This small WPF application (*PhotoBook*) shows a wrong behaviour of the `ListView` Control while using the **Grouping** functionality.
 The basic functionality is implemented in the `ListViewPresenterView.xml` and `ListViewPresenterViewModel.vb`. This small app uses the `ImageItemViewModel.vb` class to provide a few properties for a small image icon as shown in the picture below.
 
 ![](https://github.com/DrCQ/ListViewGroupingTest/blob/a198a3a079006579f66d052d1d887ce6ef8876f8/ListViewGroupingTest/Pictures/PhotoBook%20-%20Wrap%20List%20View.png)
@@ -38,7 +38,7 @@ After activating the **Grouping** functionality (adding the `GroupDescription`) 
 
 Switching off the **Grouping** is resulting in the propert (horizonal wrap) allignement as shown in the first picture.
 
-#Summary
+# Summary
 1. The `ListView` control with `<GroupStyle>` is overwriting the `ItemPanel` settings with some internal setting of the default grouping template.
 2. Switching the grouping functionality on and off is fixing the alignment problem and the proper `<ItemsPanel>` template is used.
-3. I don't find a way to fix the alignment problem in  XAMP or code.
+3. I don't find a way to fix this alignment problem in  XAMP or code.
