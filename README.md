@@ -19,3 +19,13 @@ To achive this View the `ListView` control uses the following `Style`:
    </Setter>
 </Style>
 ```
+The wrong alignement occurres when the `ListView` control should support Grouping. Adding just empty `<ListView.GroupStyle>` is overriting the `WrapPanel` template of the `ItemsPanel`.
+```
+<ListView ItemsSource="{Binding ImageView}" Style="{StaticResource ListViewStyle}">
+   <ListView.GroupStyle>
+      <GroupStyle>
+      </GroupStyle>
+   </ListView.GroupStyle>
+</ListView>
+```
+The resulting view is shown in the next picture.
