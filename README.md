@@ -36,7 +36,7 @@ After activating the **Grouping** functionality (adding the `GroupDescription`) 
 
 ![](https://github.com/DrCQ/ListViewGroupingTest/blob/74e7b21715904ff3f48058b70155a99952461a48/ListViewGroupingTest/Pictures/PhotoBook%20-%20Grouping%20View.png)
 
-Switching off the **Grouping** (Clear the ) is resulting in the propert (horizonal wrap) allignement as shown in the first picture.
+Switching off the **Grouping** (Clear the `GroupDescriptions`) is resulting in the propert (horizonal wrap) allignement as shown in the first picture.
 
 # Summary
 1. The `ListView` control with `<GroupStyle>` is overwriting the `ItemPanel` settings with some internal setting of the default grouping template.
