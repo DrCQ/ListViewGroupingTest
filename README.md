@@ -2,6 +2,8 @@
 This small WPF application (*PhotoBook*) shows a wrong behaviour of the `ListView` Control while using the **Grouping** functionality. This app is based on a template using the MaterialDesign Library, NET 9 and CommunityToolkit but 
 the basic functionality is implemented in the `ListViewPresenterView.xml` and `ListViewPresenterViewModel.vb` only. The `ImageItemViewModel.vb` class provides few properties for a small image icon as shown in the picture below.
 
+Just run the small app, use File -> ShowImages to select a folder with JPG images inside. The dectected content will be displayed.
+
 ![](https://github.com/DrCQ/ListViewGroupingTest/blob/a198a3a079006579f66d052d1d887ce6ef8876f8/ListViewGroupingTest/Pictures/PhotoBook%20-%20Wrap%20List%20View.png)
 
 To achive this *view* the `ListView` control uses the following `Style`, where the `ItemsPanel` template contains the `WrapPanel` control (see below).
