@@ -1,6 +1,6 @@
 # ListViewGroupingTest
-This small WPF application (*PhotoBook*) shows a wrong behaviour of the `ListView` Control while using the **Grouping** functionality.
-The basic functionality is implemented in the `ListViewPresenterView.xml` and `ListViewPresenterViewModel.vb`. This small app uses the `ImageItemViewModel.vb` class to provide a few properties for a small image icon as shown in the picture below.
+This small WPF application (*PhotoBook*) shows a wrong behaviour of the `ListView` Control while using the **Grouping** functionality. This app is based on a template using the MaterialDesign Library, NET 9 and CommunityToolkit but 
+the basic functionality is implemented in the `ListViewPresenterView.xml` and `ListViewPresenterViewModel.vb` only. The `ImageItemViewModel.vb` class provides few properties for a small image icon as shown in the picture below.
 
 ![](https://github.com/DrCQ/ListViewGroupingTest/blob/a198a3a079006579f66d052d1d887ce6ef8876f8/ListViewGroupingTest/Pictures/PhotoBook%20-%20Wrap%20List%20View.png)
 
@@ -36,7 +36,7 @@ After activating the **Grouping** functionality (adding the `GroupDescription`) 
 
 ![](https://github.com/DrCQ/ListViewGroupingTest/blob/74e7b21715904ff3f48058b70155a99952461a48/ListViewGroupingTest/Pictures/PhotoBook%20-%20Grouping%20View.png)
 
-Switching off the **Grouping** is resulting in the propert (horizonal wrap) allignement as shown in the first picture.
+Switching off the **Grouping** (Clear the ) is resulting in the propert (horizonal wrap) allignement as shown in the first picture.
 
 # Summary
 1. The `ListView` control with `<GroupStyle>` is overwriting the `ItemPanel` settings with some internal setting of the default grouping template.
