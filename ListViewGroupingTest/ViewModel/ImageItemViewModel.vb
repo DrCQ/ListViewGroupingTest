@@ -62,7 +62,12 @@ Namespace ViewModel
         Sub New(sPath As String)
             Me.ImagePath = sPath
             Me.ImageName = Path.GetFileName(Me.ImagePath)
-            Me.ImageIcon = New BitmapImage(New Uri(Me.ImagePath))
+            Dim bm As New BitmapImage()
+            bm.BeginInit()
+            bm.UriSource = New Uri(Me.ImagePath, UriKind.Absolute)
+            bm.DecodePixelWidth = 150
+            bm.EndInit()
+            Me.ImageIcon = bm
             Dim fi As New FileInfo(Me.ImagePath)
             Me.DateCreated = fi.CreationTime
             Me.GroupingValue = String.Format("{0:yyyy-MM}", Me.DateCreated)

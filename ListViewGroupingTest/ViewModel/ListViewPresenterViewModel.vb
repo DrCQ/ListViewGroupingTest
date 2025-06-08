@@ -1,6 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
 Imports System.IO
+Imports System.Windows.Threading
 Imports CommunityToolkit.Mvvm.ComponentModel
 Imports CommunityToolkit.Mvvm.Input
 Imports ListViewGroupingTest.Services
@@ -46,16 +46,12 @@ Namespace ViewModel
 
         ReadOnly Property LoadImagesCommand As New RelayCommand(
             Sub()
-                Dim dlg As New OpenFolderDialog With {.Title = "Select image folder", .RootDirectory = "D:\Christoph\Pictures\Development\Test Bilder"}
+                Dim dlg As New OpenFolderDialog With {.Title = "Select JPG image folder", .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)}
                 Dim ret As Boolean? = dlg.ShowDialog
                 If ret.HasValue AndAlso ret.Value = True Then
                     With dlg
                         Me.DataService.FolderName = .FolderName
-                        Dim iList As String() = Directory.GetFiles(.FolderName, "*.JPG")
-                        Me.ImageList.Clear()
-                        For Each img As String In iList
-                            Me.ImageList.Add(New ImageItemViewModel(img))
-                        Next
+                        Me.LoadImages(.FolderName)
                     End With
                 End If
                 LoadImagesCommand.NotifyCanExecuteChanged()
@@ -84,6 +80,21 @@ Namespace ViewModel
         Sub New(iAppData As IAppDataService)
             Me.DataService = iAppData
             Me.ImageView = CType(CollectionViewSource.GetDefaultView(Me.ImageList), ListCollectionView)
+        End Sub
+
+#End Region
+
+#Region "Private Methods: LoadIMages"
+
+        Private Async Sub LoadImages(path As String)
+            Dim list As String() = Directory.GetFiles(path, "*.JPG")
+            Me.DataService.ImageCount = list.Count
+            For Each img As String In list
+                Await Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                        Sub()
+                            Me.ImageList.Add(New ImageItemViewModel(img))
+                        End Sub)
+            Next
         End Sub
 
 #End Region

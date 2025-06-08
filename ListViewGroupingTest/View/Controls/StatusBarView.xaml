@@ -121,6 +121,15 @@
                 </StackPanel>
             </ContentControl>
             <Separator Grid.Column="1" Style="{StaticResource ItemSeparatorStyle}" />
+            
+            <!-- Images -->
+            <ContentControl Grid.Column="2" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="JPG Images:" Style="{StaticResource ItemHeaderStyle}"/>
+                    <TextBlock Text="{Binding DataService.ImageCount}" Style="{StaticResource ItemContentStyle}"    d:Text="17"/>
+                </StackPanel>
+            </ContentControl>
+            <Separator Grid.Column="3" Style="{StaticResource ItemSeparatorStyle}" />
 
             <!-- Notifications -->
             <ContentControl Grid.Column="7" VerticalAlignment="Center">

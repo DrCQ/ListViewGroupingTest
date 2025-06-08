@@ -10,6 +10,7 @@ Namespace Services
 
         Private _fileName As String = "File Name"
         Private _isNotModal As Boolean = True
+        Private _cnt As Integer = 0
 
 #End Region
 
@@ -30,6 +31,16 @@ Namespace Services
                 SetProperty(Of Boolean)(_isNotModal, value)
             End Set
         End Property
+
+        Property ImageCount As Integer Implements IAppDataService.ImageCount
+            Get
+                Return _cnt
+            End Get
+            Set(value As Integer)
+                SetProperty(Of Integer)(_cnt, value)
+            End Set
+        End Property
+
     End Class
 
 End Namespace
