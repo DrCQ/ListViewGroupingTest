@@ -46,12 +46,18 @@ Namespace ViewModel
 
         ReadOnly Property LoadImagesCommand As New RelayCommand(
             Sub()
-                Dim dlg As New OpenFolderDialog With {.Title = "Select JPG image folder", .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)}
+                Dim dlg As New OpenFileDialog With {
+                    .Title = "Select JPG images",
+                    .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                    .Filter = "JPG Images (*.jpg)|*.jpg|All files (*.*)|*.*",
+                    .FilterIndex = 0,
+                    .Multiselect = True
+                }
                 Dim ret As Boolean? = dlg.ShowDialog
                 If ret.HasValue AndAlso ret.Value = True Then
                     With dlg
-                        Me.DataService.FolderName = .FolderName
-                        Me.LoadImages(.FolderName)
+                        Me.DataService.FolderName = Path.GetDirectoryName(.FileName)
+                        Me.LoadImages(.FileNames)
                     End With
                 End If
                 LoadImagesCommand.NotifyCanExecuteChanged()
@@ -86,8 +92,8 @@ Namespace ViewModel
 
 #Region "Private Methods: LoadIMages"
 
-        Private Async Sub LoadImages(path As String)
-            Dim list As String() = Directory.GetFiles(path, "*.JPG")
+        Private Async Sub LoadImages(files As String())
+            Dim list As List(Of String) = files.Where(Function(x) System.IO.Path.GetExtension(x) = ".jpg").ToList
             Me.DataService.ImageCount = list.Count
             For Each img As String In list
                 Await Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
