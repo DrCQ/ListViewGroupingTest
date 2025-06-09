@@ -1,6 +1,8 @@
 # ListViewGroupingTest
-This small WPF application (*PhotoBook*) shows a wrong behaviour of the `ListView` Control while using the **Grouping** functionality. This app is based on a template using the MaterialDesign Library, NET 9 and CommunityToolkit but 
+This small WPF application (*PhotoBook*) shows a wrong behaviour of the `ListView` Control while using the **Grouping** functionality. This app is based on a template using the MaterialDesign Library, NET 9 and CommunityToolkit, but 
 the basic functionality is implemented in the `ListViewPresenterView.xml` and `ListViewPresenterViewModel.vb` only. The `ImageItemViewModel.vb` class provides few properties for a small image icon as shown in the picture below.
+
+Just run the small app, use *File -> ShowImages* to select a folder with JPG images inside. The dectected content will be displayed. The `ListView` bug isn't dependent on the MaterialDesign library. If you like to see the *plain* `ListView` behaviour just change the XAMP code (see example below) to `<Style x:Key="ListViewStyle" TargetType="{x:Type ListView}" BasedOn="{x:Null}">`
 
 ![](https://github.com/DrCQ/ListViewGroupingTest/blob/a198a3a079006579f66d052d1d887ce6ef8876f8/ListViewGroupingTest/Pictures/PhotoBook%20-%20Wrap%20List%20View.png)
 
